@@ -1,2 +1,2 @@
-# snake_unity
+# Snake
 Trabalho DM117 - Jogo Snake
