@@ -1,33 +1,34 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 
 public class ControladorJogo : MonoBehaviour
 {
 
     [Tooltip("Referência para a maça")]
-    public Transform apple;
+    public GameObject apple;
+
 
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Apple"))
-        {
-            Debug.Log("Touch it");
-            //Instantiate(apple, new Vector3(1.0f, 3.0f, 0.0f), Quaternion.identity);
-        }
-    }
 
     // Update is called once per frame
     void Update()
     {
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {  
+        // Pega novas posições em X e Y aleatórios
+        var PostionX = Random.Range(-20.0f, 20.0f);
+        var PostionZ = Random.Range(-20.0f, 20.0f);
+
+        // Instancia o objeto maçã
+        Instantiate(apple, new Vector3(PostionX, 0.0f, PostionZ), Quaternion.identity);
+
+    }
+
 }

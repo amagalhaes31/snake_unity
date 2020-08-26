@@ -1,8 +1,8 @@
 ﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using UnityEngine;
 
 public class SnakeComportamento : MonoBehaviour
 {
@@ -11,9 +11,12 @@ public class SnakeComportamento : MonoBehaviour
     [Range(0,10)]
     public float velocidadeSnake = 1.0f;
 
-    public float DelayTime = 1.0f;
+    public float DelayTime = 0.5f;
 
     public GameObject Body;
+
+
+    //public GameObject maca;
     
     private float delayCounter = 0;
 
@@ -28,7 +31,11 @@ public class SnakeComportamento : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Instantiate a new Apple in the tile
+        //var PostionX = Random.Range(-20.0f, 20.0f);
+        //var PostionZ = Random.Range(-20.0f, 20.0f);
+
+        //Instantiate(maca, new Vector3(PostionX, 0.0f, PostionZ), Quaternion.identity);
     }
 
     // Update is called once per frame
