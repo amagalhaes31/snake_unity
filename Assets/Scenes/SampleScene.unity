@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 251027054}
   m_Layer: 0
   m_Name: parede4
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 604522953}
   m_Layer: 0
   m_Name: parede3
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -655,7 +655,7 @@ GameObject:
   - component: {fileID: 1473306711}
   m_Layer: 0
   m_Name: parede1
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -671,8 +671,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 0.9979151}
+  m_Center: {x: 0, y: 0, z: 0.0010385513}
 --- !u!23 &1473306712
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -755,7 +755,7 @@ GameObject:
   - component: {fileID: 1985363322}
   m_Layer: 0
   m_Name: parede2
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -853,6 +853,10 @@ PrefabInstance:
       objectReference: {fileID: 1834959781}
     - target: {fileID: 3144449366921792559, guid: 481b2b40e7527fc4395e7c0c0c9e7a43, type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3144449366921792559, guid: 481b2b40e7527fc4395e7c0c0c9e7a43, type: 3}
+      propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9190441879332550982, guid: 481b2b40e7527fc4395e7c0c0c9e7a43, type: 3}

@@ -4,8 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 
+[RequireComponent(typeof(Rigidbody))]
 public class SnakeComportamento : MonoBehaviour
 {
+
+    public Rigidbody rb;
+
     // Variáveis utilizadas no projeto
     [Tooltip("Velocidade do snake")]
     [Range(0,10)]
@@ -14,9 +18,6 @@ public class SnakeComportamento : MonoBehaviour
     public float DelayTime = 0.5f;
 
     public GameObject Body;
-
-
-    //public GameObject maca;
     
     private float delayCounter = 0;
 
@@ -26,16 +27,19 @@ public class SnakeComportamento : MonoBehaviour
 
     private bool SnakeBodyCollision = true;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
-        // Instantiate a new Apple in the tile
-        //var PostionX = Random.Range(-20.0f, 20.0f);
-        //var PostionZ = Random.Range(-20.0f, 20.0f);
+        rb = GetComponent<Rigidbody>();
 
-        //Instantiate(maca, new Vector3(PostionX, 0.0f, PostionZ), Quaternion.identity);
+        EnableRagdoll();    
+    }
+
+    // Habilitar o rigidbody para controlar e detectar colisões
+    void EnableRagdoll()
+    {
+        rb.isKinematic = false;
+        rb.detectCollisions = true;
     }
 
     // Update is called once per frame
