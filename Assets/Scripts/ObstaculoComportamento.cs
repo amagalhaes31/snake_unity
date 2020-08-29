@@ -6,30 +6,35 @@ using UnityEngine.SceneManagement;
 
 public class ObstaculoComportamento : MonoBehaviour
 {
-    [Tooltip("Lista dos obstáculos")]
-    public GameObject[] walls;
 
     [Tooltip("Delay para reiniciar o jogo")]
     public float tempoEspera = 2.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        walls = GameObject.FindGameObjectsWithTag("Wall");
 
-        if (walls.Length > 0)
+    public void OnCollisionEnter(Collision collision)
+    {
+
+        Debug.Log("Entered on OnCollisionEnter");
+        if (collision.gameObject.GetComponent<SnakeComportamento>())
         {
-            Debug.Log(walls);
+            Invoke("ResetaJogo", tempoEspera);
         }
-       
+
     }
 
-    // Reinicia o jogo se houver uma colisão com as paredes
+    /// <summary>
+    /// Reinicia o jogo
+    /// </summary>
     void ResetaJogo()
     {
         Debug.Log("Method called after collision");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+       
     }
 
     // Update is called once per frame
@@ -37,21 +42,6 @@ public class ObstaculoComportamento : MonoBehaviour
     {
 
 
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-
-        Debug.Log("Entered on OnCollisionEnter");
-
-        foreach (GameObject wall in walls)
-        {
-            if (collision.gameObject.Equals(wall))
-            {
-                Debug.Log("Snake collide");
-                //Invoke("ResetaJogo", tempoEspera);
-            }
-        }
     }
 
 }
