@@ -15,22 +15,19 @@ public class ObstaculoComportamento : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         walls = GameObject.FindGameObjectsWithTag("Wall");
-    }
 
-    public void OnCollisionEnter(Collision collision) {
-
-        foreach (GameObject wall in walls)
+        if (walls.Length > 0)
         {
-            if (collision.gameObject.Equals(wall))
-            {
-                Invoke("ResetaJogo", tempoEspera);
-            }
+            Debug.Log(walls);
         }
+       
     }
 
     // Reinicia o jogo se houver uma colisão com as paredes
-    void ResetaJogo() {
+    void ResetaJogo()
+    {
         Debug.Log("Method called after collision");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -38,6 +35,23 @@ public class ObstaculoComportamento : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+
+        Debug.Log("Entered on OnCollisionEnter");
+
+        foreach (GameObject wall in walls)
+        {
+            if (collision.gameObject.Equals(wall))
+            {
+                Debug.Log("Snake collide");
+                //Invoke("ResetaJogo", tempoEspera);
+            }
+        }
+    }
+
 }

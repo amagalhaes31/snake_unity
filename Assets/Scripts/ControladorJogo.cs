@@ -21,7 +21,7 @@ public class ControladorJogo : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {  
+    {
         // Pega novas posições em X e Y aleatórios
         var PostionX = Random.Range(-20.0f, 20.0f);
         var PostionZ = Random.Range(-20.0f, 20.0f);

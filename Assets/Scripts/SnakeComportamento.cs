@@ -31,15 +31,7 @@ public class SnakeComportamento : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        EnableRagdoll();    
-    }
-
-    // Habilitar o rigidbody para controlar e detectar colisões
-    void EnableRagdoll()
-    {
-        rb.isKinematic = false;
-        rb.detectCollisions = true;
+  
     }
 
     // Update is called once per frame
