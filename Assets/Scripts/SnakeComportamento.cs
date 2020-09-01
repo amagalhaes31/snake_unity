@@ -3,11 +3,12 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using UnityEngine.SceneManagement;
+using System.Threading;
 
 [RequireComponent(typeof(Rigidbody))]
 public class SnakeComportamento : MonoBehaviour
 {
-
     public Rigidbody rb;
 
     // Variáveis utilizadas no projeto
@@ -25,19 +26,16 @@ public class SnakeComportamento : MonoBehaviour
 
     private List<Transform> body = new List<Transform>();
 
-    private bool SnakeBodyCollision = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-  
+        rb = GetComponent<Rigidbody>();  
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if (!SnakeBodyCollision) return;
+    {     
 
         // Contagem do Tempo 
         delayCounter += Time.deltaTime;
@@ -58,9 +56,9 @@ public class SnakeComportamento : MonoBehaviour
         
         // Verifica colisão entre a cabeça e o corpo da snake
         if (CheckCollisionBody(direction))
-        {
-            SnakeBodyCollision = false;
-            return;
+        {           
+            // Carrega a tela inicial do jogo
+            CarregaScene("InitialScene");            
         }
 
         // Verifica se houve TimeOut e então a snake anda pelo plano
@@ -109,18 +107,29 @@ public class SnakeComportamento : MonoBehaviour
         }
     }
 
-    // Verifica se houce uma colisão com o corpo da snake
+    // Verifica se houve uma colisão com o corpo da snake
     private bool CheckCollisionBody(Vector3 direction)
     {
         RaycastHit hit;
 
         if(Physics.Raycast(transform.position, direction, out hit, 1))
-        {
+        {            
             return hit.transform.tag.Equals("Body");
         }
         else
         {
             return false;
         }
+    }
+
+
+    /// <summary>
+    /// Metodo para carregar uma scene
+    /// </summary>
+    /// <param name="nomeScene">Nome da scene que sera carregada</param>
+    public void CarregaScene(string nomeScene)
+    { 
+        Thread.Sleep(3000);        
+        SceneManager.LoadScene(nomeScene);
     }
 }

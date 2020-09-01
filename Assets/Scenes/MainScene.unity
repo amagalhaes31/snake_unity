@@ -1089,7 +1089,7 @@ PrefabInstance:
       objectReference: {fileID: 1930485276}
     - target: {fileID: -9022182629451047212, guid: 481b2b40e7527fc4395e7c0c0c9e7a43, type: 3}
       propertyPath: DelayTime
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3144449366921792559, guid: 481b2b40e7527fc4395e7c0c0c9e7a43, type: 3}
       propertyPath: m_UseGravity
