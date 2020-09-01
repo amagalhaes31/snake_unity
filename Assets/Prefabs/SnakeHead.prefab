@@ -111,9 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeSnake: 1
   DelayTime: 1
-  direction: {x: 1, y: 0, z: 0}
   Body: {fileID: 5407898158750277377, guid: 6ef22dd01021cb745b50321f1d39e64d, type: 3}
-  body: []
 --- !u!54 &3144449366921792559
 Rigidbody:
   m_ObjectHideFlags: 0
