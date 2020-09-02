@@ -35,7 +35,11 @@ public class SnakeComportamento : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {     
+    {   
+        // Retorna se o jogo estiver pausado
+        if (MenuPauseComp.pausado){
+            return;
+        }  
 
         // Contagem do Tempo 
         delayCounter += Time.deltaTime;
