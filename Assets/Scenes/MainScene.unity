@@ -2370,6 +2370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apple: {fileID: 1579533499523297947, guid: 76bdc83f4de5bda4fb4e39f2abb31cd1, type: 3}
+  destruicao: {fileID: 0}
 --- !u!4 &1693412452
 Transform:
   m_ObjectHideFlags: 0

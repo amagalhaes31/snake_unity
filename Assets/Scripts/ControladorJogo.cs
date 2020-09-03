@@ -6,11 +6,14 @@ public class ControladorJogo : MonoBehaviour
     [Tooltip("Referência para a maça")]
     public GameObject apple;
 
+    [Tooltip("Particle system para destruição da maça")]
+    public GameObject destruicao;
+
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
 
@@ -28,7 +31,7 @@ public class ControladorJogo : MonoBehaviour
 
         // Instancia o objeto maçã
         Instantiate(apple, new Vector3(PostionX, 0.0f, PostionZ), Quaternion.identity);
-
+        
     }
 
 }
