@@ -27,6 +27,10 @@ public class SnakeComportamento : MonoBehaviour
     private List<Transform> body = new List<Transform>();
 
 
+    [Tooltip("Particle system para destruição da maça")]
+    public GameObject destruicao;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -135,5 +139,20 @@ public class SnakeComportamento : MonoBehaviour
     { 
         Thread.Sleep(3000);        
         SceneManager.LoadScene(nomeScene);
+    }
+
+    public void TouchedObject()
+    {
+
+        Debug.Log("Method called via SendMessage");
+
+        if (destruicao != null)
+        {
+            var particles = Instantiate(destruicao, transform.position, Quaternion.identity);
+
+            Destroy(particles, 1.0f);
+        }
+
+        Destroy(this.gameObject);
     }
 }

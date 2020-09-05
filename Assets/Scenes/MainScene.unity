@@ -1368,6 +1368,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1579533499523297892, guid: 76bdc83f4de5bda4fb4e39f2abb31cd1, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1579533499523297895, guid: 76bdc83f4de5bda4fb4e39f2abb31cd1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2370,7 +2374,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apple: {fileID: 1579533499523297947, guid: 76bdc83f4de5bda4fb4e39f2abb31cd1, type: 3}
-  destruicao: {fileID: 0}
 --- !u!4 &1693412452
 Transform:
   m_ObjectHideFlags: 0
