@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.Advertisements;
+
 
 public class ControladorJogo : MonoBehaviour
 {
@@ -9,7 +11,8 @@ public class ControladorJogo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Workaround
+        Advertisement.Initialize("2586158");            // Developed ID
     }
 
 
@@ -20,8 +23,8 @@ public class ControladorJogo : MonoBehaviour
         {
 
             Debug.Log("Touch");
-            var pos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
+            var pos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
             DestroyObject(pos);
         }
