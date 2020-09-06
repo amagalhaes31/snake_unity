@@ -8,6 +8,7 @@ using System.Threading;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
+
 public class SnakeComportamento : MonoBehaviour
 {
     public Rigidbody rb;
@@ -43,9 +44,42 @@ public class SnakeComportamento : MonoBehaviour
     Text txtVidas;
 
 
-    private static int pontosAtual;
-    private static int pontosMaximo;
-    
+    [Tooltip("Acesso para o componente Text -> GameOver")]
+    Text txtGameOver;
+
+    // Variavel de controle para parar a cena
+    public static int cenaParada; 
+
+    private void ContaNumeroVidas() {
+       
+       // Decrementa a variavel vida
+        MenuPrincipal.vidas--;
+
+        // Atualiza o valor das vidas da snake
+        txtVidas = GameObject.Find("Canvas/Vidas").GetComponent<Text>();        
+        txtVidas.text= $"Life: {MenuPrincipal.vidas.ToString()}";            
+
+        // Se não possuir mais vidas, Game Over, então carregar a cena inicial
+        if (MenuPrincipal.vidas == 2)
+        {                
+            // Habilita a mensagem "Game Over" na cena principal do jogo                         
+            txtGameOver.enabled = true;
+
+            // Avisa para travar a cena
+            cenaParada = 1;
+
+            // Chama a cena inicial após 5 segundos
+            Invoke("CarregaInitialScene", 5.0f); 
+        } 
+        else 
+        {
+            // Avisa para travar a cena
+            cenaParada = 1;
+
+            // Chama a cena inicial após 5 segundos
+            Invoke("CarregaMainScene", 3.0f); 
+        }     
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -54,17 +88,25 @@ public class SnakeComportamento : MonoBehaviour
         rb = GetComponent<Rigidbody>(); 
 
         // Limpa e atualiza o valor do score atual
-        pontosAtual = 0;
+        MenuPrincipal.pontosAtual = 0;
         txtPontosAtual = GameObject.Find("Canvas/PontosAtual").GetComponent<Text>();
-        txtPontosAtual.text= $"Score: {pontosAtual.ToString()}";
+        txtPontosAtual.text= $"Score: {MenuPrincipal.pontosAtual.ToString()}";
 
         // Atualiza o valor do score máximo
         txtPontosMaximo = GameObject.Find("Canvas/PontosMaximo").GetComponent<Text>();        
-        txtPontosMaximo.text= $"High Score: {pontosMaximo.ToString()}"; 
+        txtPontosMaximo.text= $"High Score: {MenuPrincipal.pontosMaximo.ToString()}"; 
 
         // Atualiza o valor das vidas da snake
         txtVidas = GameObject.Find("Canvas/Vidas").GetComponent<Text>();        
         txtVidas.text= $"Life: {MenuPrincipal.vidas.ToString()}"; 
+
+         // Atualiza o valor das vidas da snake
+        txtGameOver =  GameObject.Find("Canvas/GameOver").GetComponent<Text>(); 
+        // Desabilita a mensagem "Game Over" na cena principal do jogo
+        txtGameOver.enabled = false;
+        
+        // Habilita a cena
+        cenaParada = 0;          
 
     }
 
@@ -72,7 +114,7 @@ public class SnakeComportamento : MonoBehaviour
     void Update()
     {   
         // Retorna se o jogo estiver pausado
-        if (MenuPauseComp.pausado){
+        if (MenuPauseComp.pausado || cenaParada == 1) {
             return;
         }  
 
@@ -93,29 +135,10 @@ public class SnakeComportamento : MonoBehaviour
             direction = -Vector3.right;
         }
         
-        // Verifica colisão entre a cabeça e o corpo da snake
-        if (CheckCollisionBody(direction))
+        // Verifica colisão entre a cabeça e o corpo da snake ou nas paredes
+        if (CheckCollisionBody(direction) || ObstaculoComportamento.paredeColisao == 1)
         {   
-            // Decrementa a variavel vida
-            MenuPrincipal.vidas--;
-
-            // Atualiza o valor das vidas da snake
-            txtVidas = GameObject.Find("Canvas/Vidas").GetComponent<Text>();        
-            txtVidas.text= $"Life: {MenuPrincipal.vidas.ToString()}";
-
-            Thread.Sleep(2000); 
-
-            // Se não possuir mais vidas, Game Over, então carregar a cena inicial
-            if (MenuPrincipal.vidas == 0)
-            {
-                // Carrega a tela inicial do jogo
-                CarregaScene("InitialScene");  
-            } 
-            else 
-            {
-                // Carrega a tela inicial do jogo
-                CarregaScene("MainScene"); 
-            }     
+            ContaNumeroVidas();
         }
 
 
@@ -165,15 +188,15 @@ public class SnakeComportamento : MonoBehaviour
 
             
             // Incrementa o valor dos pontos atuais
-            pontosAtual += 100;
+            MenuPrincipal.pontosAtual += 100;
             txtPontosAtual = GameObject.Find("Canvas/PontosAtual").GetComponent<Text>();
-            txtPontosAtual.text= $"Score: {pontosAtual.ToString()}";
+            txtPontosAtual.text= $"Score: {MenuPrincipal.pontosAtual.ToString()}";
 
 
             // Atualiza o valor do score máximo
-            if (pontosAtual > pontosMaximo) pontosMaximo = pontosAtual;
+            if (MenuPrincipal.pontosAtual > MenuPrincipal.pontosMaximo) MenuPrincipal.pontosMaximo = MenuPrincipal.pontosAtual;
             txtPontosMaximo = GameObject.Find("Canvas/PontosMaximo").GetComponent<Text>();        
-            txtPontosMaximo.text= $"High Score: {pontosMaximo.ToString()}"; 
+            txtPontosMaximo.text= $"High Score: {MenuPrincipal.pontosMaximo.ToString()}"; 
         }
     }
 
@@ -198,14 +221,12 @@ public class SnakeComportamento : MonoBehaviour
     /// </summary>
     /// <param name="nomeScene">Nome da scene que sera carregada</param>
     public void CarregaScene(string nomeScene)
-    { 
-        Thread.Sleep(3000);        
+    {
         SceneManager.LoadScene(nomeScene);
     }
 
     public void TouchedObject()
     {
-
         Debug.Log("Method called via SendMessage");
 
         if (destruicao != null)
@@ -217,4 +238,25 @@ public class SnakeComportamento : MonoBehaviour
 
         Destroy(this.gameObject);
     }
+
+
+    /// <summary>
+    /// Carrega Cena Inicial
+    /// </summary>
+    void CarregaInitialScene()
+    {
+        // Carrega a tela inicial do jogo
+        CarregaScene("InitialScene"); 
+    }
+
+
+    /// <summary>
+    /// Carrega Cena Principal
+    /// </summary>
+    void CarregaMainScene()
+    {
+        // Carrega a tela inicial do jogo
+        CarregaScene("MainScene"); 
+    }
+
 }

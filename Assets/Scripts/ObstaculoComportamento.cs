@@ -10,13 +10,19 @@ public class ObstaculoComportamento : MonoBehaviour
     [Tooltip("Delay para reiniciar o jogo")]
     public float tempoEspera = 2.0f;
 
+    public static int paredeColisao = 0;
 
     public void OnCollisionEnter(Collision collision)
     {
 
         Debug.Log("Entered on OnCollisionEnter");
+        
         if (collision.gameObject.GetComponent<SnakeComportamento>())
         {
+            // Avisa que houve uma colisão nas paredes         
+            paredeColisao = 1;
+
+            // Reseta o jogo
             Invoke("ResetaJogo", tempoEspera);
         }
 
@@ -27,8 +33,12 @@ public class ObstaculoComportamento : MonoBehaviour
     /// </summary>
     void ResetaJogo()
     {
-        Debug.Log("Method called after collision");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("Method called after collision");        
+
+        // Desativa a colisão nas paredes 
+        paredeColisao = 0;
+        
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // Start is called before the first frame update

@@ -8,12 +8,17 @@ public class MenuPrincipal : MonoBehaviour
 {
 
     public static int vidas = 3;
+    public static int pontosAtual = 0;
+    public static int pontosMaximo = 0;
+   
 
     // Start is called before the first frame update
     void Start()
     {
-        // Inicializa o número de vidas do snake
+        // Inicializa os atributos (vida e pontuações)
         vidas = 3;
+        pontosAtual = 0;
+        pontosMaximo = 0;
     }
 
     // Update is called once per frame
