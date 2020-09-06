@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine.SceneManagement;
 using System.Threading;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class SnakeComportamento : MonoBehaviour
@@ -26,15 +27,45 @@ public class SnakeComportamento : MonoBehaviour
 
     private List<Transform> body = new List<Transform>();
 
-
     [Tooltip("Particle system para destruição da maça")]
     public GameObject destruicao;
 
 
+    [Tooltip("Acesso para o componente Text -> PontosAtual")]
+    Text txtPontosAtual;
+
+    
+    [Tooltip("Acesso para o componente Text -> PontosMaximo")]
+    Text txtPontosMaximo;
+
+    
+    [Tooltip("Acesso para o componente Text -> Vidas")]
+    Text txtVidas;
+
+
+    private static int pontosAtual;
+    private static int pontosMaximo;
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();  
+        // Referencia ao Rigidbody
+        rb = GetComponent<Rigidbody>(); 
+
+        // Limpa e atualiza o valor do score atual
+        pontosAtual = 0;
+        txtPontosAtual = GameObject.Find("Canvas/PontosAtual").GetComponent<Text>();
+        txtPontosAtual.text= $"Score: {pontosAtual.ToString()}";
+
+        // Atualiza o valor do score máximo
+        txtPontosMaximo = GameObject.Find("Canvas/PontosMaximo").GetComponent<Text>();        
+        txtPontosMaximo.text= $"High Score: {pontosMaximo.ToString()}"; 
+
+        // Atualiza o valor das vidas da snake
+        txtVidas = GameObject.Find("Canvas/Vidas").GetComponent<Text>();        
+        txtVidas.text= $"Life: {MenuPrincipal.vidas.ToString()}"; 
+
     }
 
     // Update is called once per frame
@@ -49,25 +80,44 @@ public class SnakeComportamento : MonoBehaviour
         delayCounter += Time.deltaTime;
 
         // Deslocaento da snake        
-        if (Input.GetKeyDown(KeyCode.W) && (direction != -Vector3.forward)) {
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && (direction != -Vector3.forward)) {            // Para cima
             direction = Vector3.forward;
         } 
-        else if(Input.GetKeyDown(KeyCode.S) && (direction != Vector3.forward)) {
+        else if((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))&& (direction != Vector3.forward)) {        // Para baixo
             direction = -Vector3.forward;
         } 
-        else if(Input.GetKeyDown(KeyCode.D) && (direction != -Vector3.right)) {
+        else if((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && (direction != -Vector3.right)) {       // Para direita
             direction = Vector3.right;
         }
-        else if(Input.GetKeyDown(KeyCode.A) && (direction != -Vector3.right)) {
+        else if((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && (direction != Vector3.right)) {         // Para esquerda
             direction = -Vector3.right;
         }
         
         // Verifica colisão entre a cabeça e o corpo da snake
         if (CheckCollisionBody(direction))
-        {           
-            // Carrega a tela inicial do jogo
-            CarregaScene("InitialScene");            
+        {   
+            // Decrementa a variavel vida
+            MenuPrincipal.vidas--;
+
+            // Atualiza o valor das vidas da snake
+            txtVidas = GameObject.Find("Canvas/Vidas").GetComponent<Text>();        
+            txtVidas.text= $"Life: {MenuPrincipal.vidas.ToString()}";
+
+            Thread.Sleep(2000); 
+
+            // Se não possuir mais vidas, Game Over, então carregar a cena inicial
+            if (MenuPrincipal.vidas == 0)
+            {
+                // Carrega a tela inicial do jogo
+                CarregaScene("InitialScene");  
+            } 
+            else 
+            {
+                // Carrega a tela inicial do jogo
+                CarregaScene("MainScene"); 
+            }     
         }
+
 
         // Verifica se houve TimeOut e então a snake anda pelo plano
         if (delayCounter > DelayTime) 
@@ -112,6 +162,18 @@ public class SnakeComportamento : MonoBehaviour
             }
             
             body.Add(b.transform);
+
+            
+            // Incrementa o valor dos pontos atuais
+            pontosAtual += 100;
+            txtPontosAtual = GameObject.Find("Canvas/PontosAtual").GetComponent<Text>();
+            txtPontosAtual.text= $"Score: {pontosAtual.ToString()}";
+
+
+            // Atualiza o valor do score máximo
+            if (pontosAtual > pontosMaximo) pontosMaximo = pontosAtual;
+            txtPontosMaximo = GameObject.Find("Canvas/PontosMaximo").GetComponent<Text>();        
+            txtPontosMaximo.text= $"High Score: {pontosMaximo.ToString()}"; 
         }
     }
 

@@ -6,10 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class MenuPrincipal : MonoBehaviour
 {
+
+    public static int vidas = 3;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Inicializa o número de vidas do snake
+        vidas = 3;
     }
 
     // Update is called once per frame
