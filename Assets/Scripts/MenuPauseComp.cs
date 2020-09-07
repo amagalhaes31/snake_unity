@@ -15,15 +15,24 @@ public class MenuPauseComp : MonoBehaviour
     /// <sumary>
     /// Metodo para reinicializar a scene
     /// </summary>
-    public void Restart(){
+    public static void Restart(){
 
         MenuPrincipal.vidas = 3;
         MenuPrincipal.pontosAtual = 0;
         MenuPrincipal.pontosMaximo = 0;
-        UnityAdControle.ShowAd();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public static void Continue()
+    {
+        MenuPrincipal.vidas = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ShowRewardAd()
+    {
+        UnityAdControle.ShowRewardAd();
+    }
 
     /// <sumary>
     /// Metodo para reinicializar a scene

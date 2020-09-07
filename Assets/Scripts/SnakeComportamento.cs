@@ -245,7 +245,6 @@ public class SnakeComportamento : MonoBehaviour
     {
         var gameOverMenu = GetGameOverMenu();
         gameOverMenu.SetActive(true);
-        
     }
 
     /// <summary>

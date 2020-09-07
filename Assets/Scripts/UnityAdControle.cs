@@ -10,7 +10,6 @@ public class UnityAdControle : MonoBehaviour
 {
 
     public static bool showAds = true;
-
     
     public static void ShowAd(){
         
@@ -20,6 +19,26 @@ public class UnityAdControle : MonoBehaviour
             }
         //#endif
 
+    }
+
+    /// <summary>
+    /// Metodo para mostrar Ad com recompensa
+    /// </summary>
+    [System.Obsolete]
+    public static void ShowRewardAd()
+    {
+        //#if UNITY_ADS            
+        if (Advertisement.IsReady())
+        {
+
+            var opcoes = new ShowOptions
+            {
+                resultCallback = TratarMostrarResultado
+            };
+            Advertisement.Show(opcoes);
+        }
+
+        //#endif
     }
 
 
@@ -34,4 +53,24 @@ public class UnityAdControle : MonoBehaviour
     {
         
     }
+//#if Unity_ADS
+    public static void TratarMostrarResultado(ShowResult resultado)
+    {
+
+        switch (resultado)
+        {
+            case ShowResult.Finished:
+                MenuPauseComp.Continue();
+                break;
+
+            case ShowResult.Skipped:
+                MenuPauseComp.Restart();
+                break;
+
+            case ShowResult.Failed:
+                Debug.LogError("Erro no Ad");
+                break;
+        }
+    }
+//#endif
 }
