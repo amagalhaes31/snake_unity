@@ -53,6 +53,11 @@ public class UnityAdControle : MonoBehaviour
     {
         
     }
+
+    /// <summary>
+    /// Maquina de estado para retornar um metodo conforme acao do usuario
+    /// </summary>
+    /// <param name="resultado"></param>
 //#if Unity_ADS
     public static void TratarMostrarResultado(ShowResult resultado)
     {

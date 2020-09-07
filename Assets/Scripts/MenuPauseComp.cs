@@ -23,12 +23,18 @@ public class MenuPauseComp : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    /// <summary>
+    /// Da uma sobrevida se o jogador assistir o anuncio
+    /// </summary>
     public static void Continue()
     {
         MenuPrincipal.vidas = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    /// <summary>
+    /// Metodo chamado quando o jogador clicar em Continue no GameOverMenu
+    /// </summary>
     public void ShowRewardAd()
     {
         UnityAdControle.ShowRewardAd();

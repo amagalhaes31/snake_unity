@@ -176,6 +176,9 @@ public class SnakeComportamento : MonoBehaviour
         {            
             Destroy(other.gameObject);
 
+            // Toca o audio pop.mp3 quando a maca e atingida
+            other.GetComponent<AudioSource>().Play();
+
             var b = Instantiate(Body);
 
             if (body.Count > 0) 
