@@ -227,16 +227,15 @@ public class SnakeComportamento : MonoBehaviour
 
     public void TouchedObject()
     {
-        Debug.Log("Method called via SendMessage");
 
         if (destruicao != null)
         {
+            Debug.Log("Destruicao is not null");
+            
             var particles = Instantiate(destruicao, transform.position, Quaternion.identity);
-
-            Destroy(particles, 1.0f);
+            
         }
 
-        Destroy(this.gameObject);
     }
 
 

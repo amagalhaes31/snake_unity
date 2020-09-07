@@ -16,15 +16,7 @@ public class ControladorJogo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
-        {
 
-            Debug.Log("Touch");
-            var pos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-
-
-            DestroyObject(pos);
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,20 +27,10 @@ public class ControladorJogo : MonoBehaviour
 
         // Instancia o objeto maçã
         Instantiate(apple, new Vector3(PostionX, 0.0f, PostionZ), Quaternion.identity);
-        
-    }
 
-    private static void DestroyObject(Vector3 touch)
-    {
+        other.gameObject.SendMessage("TouchedObject", SendMessageOptions.DontRequireReceiver);
 
-        // TODO - google how to send message using OntriggerEnter
-        Ray touchRay = Camera.main.ScreenPointToRay(touch);
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(touchRay, out hit))
-            hit.transform.SendMessage("TouchedObject", 
-                SendMessageOptions.DontRequireReceiver);
+ 
     }
 
 }

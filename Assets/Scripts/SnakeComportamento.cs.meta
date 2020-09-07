@@ -6,7 +6,7 @@ MonoImporter:
   defaultReferences:
   - rb: {instanceID: 0}
   - Body: {instanceID: 0}
-  - destruicao: {fileID: 8289223422119871511, guid: cd579bdfb41ea9149827ef276f8be5b0, type: 3}
+  - destruicao: {fileID: 3219250114417612916, guid: cd579bdfb41ea9149827ef276f8be5b0, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
