@@ -12,10 +12,10 @@ using UnityEngine.UI;
 public class SnakeComportamento : MonoBehaviour
 {
 
+    public Rigidbody rb;
+
     [SerializeField]
     private GameObject menuGameOverPanel;
-
-    public Rigidbody rb;
 
     // Variáveis utilizadas no projeto
     [Tooltip("Velocidade do snake")]
@@ -44,9 +44,6 @@ public class SnakeComportamento : MonoBehaviour
     [Tooltip("Acesso para o componente Text -> Vidas")]
     Text txtVidas;
 
-    [Tooltip("Acesso para o componente Text -> GameOver")]
-    Text txtGameOver;
-
     [Tooltip("Acesso para o componente Text -> You lose")]
     Text txtLose;
 
@@ -67,14 +64,14 @@ public class SnakeComportamento : MonoBehaviour
         // Se não possuir mais vidas, Game Over, então carregar a cena inicial
         if (MenuPrincipal.vidas == 0)
         {                
-            // Habilita a mensagem "Game Over" na cena principal do jogo                         
-            txtGameOver.enabled = true;
-
+            
             // Avisa para travar a cena
             cenaParada = 1;
 
+            GameOver();
+
             // Chama a cena inicial após 5 segundos
-            Invoke("CarregaInitialScene", 5.0f); 
+            //Invoke("CarregaInitialScene", 5.0f); 
         } 
         else 
         {
@@ -105,10 +102,6 @@ public class SnakeComportamento : MonoBehaviour
         txtVidas = GameObject.Find("Canvas/Vidas").GetComponent<Text>();        
         txtVidas.text= $"Life: {MenuPrincipal.vidas.ToString()}"; 
 
-         // Mostra GameOver quando o número de vidas acaba
-        txtGameOver =  GameObject.Find("Canvas/GameOver").GetComponent<Text>(); 
-        // Desabilita a mensagem "Game Over" na cena principal do jogo
-        txtGameOver.enabled = false;
 
         // Mostra You Lose quando o jogador perde uma vida
         txtLose = GameObject.Find("Canvas/Lose").GetComponent<Text>();
@@ -248,6 +241,12 @@ public class SnakeComportamento : MonoBehaviour
 
     }
 
+    public void GameOver()
+    {
+        var gameOverMenu = GetGameOverMenu();
+        gameOverMenu.SetActive(true);
+        
+    }
 
     /// <summary>
     /// Carrega Cena Inicial
@@ -276,5 +275,4 @@ public class SnakeComportamento : MonoBehaviour
     {
         return GameObject.Find("Canvas").transform.Find("MenuGameOver").gameObject;
     }
-
 }

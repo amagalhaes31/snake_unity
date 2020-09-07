@@ -12,11 +12,15 @@ public class MenuPauseComp : MonoBehaviour
     [SerializeField]
     private GameObject menuPausePanel;
 
-
     /// <sumary>
     /// Metodo para reinicializar a scene
     /// </summary>
     public void Restart(){
+
+        MenuPrincipal.vidas = 3;
+        MenuPrincipal.pontosAtual = 0;
+        MenuPrincipal.pontosMaximo = 0;
+        UnityAdControle.ShowAd();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -45,7 +49,6 @@ public class MenuPauseComp : MonoBehaviour
     {
         SceneManager.LoadScene(nomeScene);
     }
-
 
     // Start is called before the first frame update
     void Start()
