@@ -36,7 +36,8 @@ public class MenuPrincipal : MonoBehaviour
 
         //#if UNITY_ADS
             // Mostra um anuncio
-            if(UnityAdControle.showAds){
+            if(UnityAdControle.showAds)
+            {
                 UnityAdControle.ShowAd();
             }
         //#endif

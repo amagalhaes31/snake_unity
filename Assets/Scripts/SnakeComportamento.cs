@@ -11,6 +11,10 @@ using UnityEngine.UI;
 
 public class SnakeComportamento : MonoBehaviour
 {
+
+    [SerializeField]
+    private GameObject menuGameOverPanel;
+
     public Rigidbody rb;
 
     // Variáveis utilizadas no projeto
@@ -31,21 +35,20 @@ public class SnakeComportamento : MonoBehaviour
     [Tooltip("Particle system para destruição da maça")]
     public GameObject destruicao;
 
-
     [Tooltip("Acesso para o componente Text -> PontosAtual")]
     Text txtPontosAtual;
-
     
     [Tooltip("Acesso para o componente Text -> PontosMaximo")]
     Text txtPontosMaximo;
 
-    
     [Tooltip("Acesso para o componente Text -> Vidas")]
     Text txtVidas;
 
-
     [Tooltip("Acesso para o componente Text -> GameOver")]
     Text txtGameOver;
+
+    [Tooltip("Acesso para o componente Text -> You lose")]
+    Text txtLose;
 
     // Variavel de controle para parar a cena
     public static int cenaParada; 
@@ -57,10 +60,12 @@ public class SnakeComportamento : MonoBehaviour
 
         // Atualiza o valor das vidas da snake
         txtVidas = GameObject.Find("Canvas/Vidas").GetComponent<Text>();        
-        txtVidas.text= $"Life: {MenuPrincipal.vidas.ToString()}";            
+        txtVidas.text= $"Life: {MenuPrincipal.vidas.ToString()}";
+
+        txtLose.enabled = true;
 
         // Se não possuir mais vidas, Game Over, então carregar a cena inicial
-        if (MenuPrincipal.vidas == 2)
+        if (MenuPrincipal.vidas == 0)
         {                
             // Habilita a mensagem "Game Over" na cena principal do jogo                         
             txtGameOver.enabled = true;
@@ -100,11 +105,16 @@ public class SnakeComportamento : MonoBehaviour
         txtVidas = GameObject.Find("Canvas/Vidas").GetComponent<Text>();        
         txtVidas.text= $"Life: {MenuPrincipal.vidas.ToString()}"; 
 
-         // Atualiza o valor das vidas da snake
+         // Mostra GameOver quando o número de vidas acaba
         txtGameOver =  GameObject.Find("Canvas/GameOver").GetComponent<Text>(); 
         // Desabilita a mensagem "Game Over" na cena principal do jogo
         txtGameOver.enabled = false;
-        
+
+        // Mostra You Lose quando o jogador perde uma vida
+        txtLose = GameObject.Find("Canvas/Lose").GetComponent<Text>();
+        // Desabilita a mensagem "You lose" na cena principal do jogo
+        txtLose.enabled = false;
+
         // Habilita a cena
         cenaParada = 0;          
 
@@ -256,6 +266,15 @@ public class SnakeComportamento : MonoBehaviour
     {
         // Carrega a tela inicial do jogo
         CarregaScene("MainScene"); 
+    }
+
+    /// <summary>
+    /// Busca o MenuGameOver
+    /// </summary>
+    /// <returns>O GameObject MenuGameOver</returns>
+    GameObject GetGameOverMenu()
+    {
+        return GameObject.Find("Canvas").transform.Find("MenuGameOver").gameObject;
     }
 
 }
