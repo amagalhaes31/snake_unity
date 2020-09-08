@@ -7,7 +7,7 @@ O jogo possui uma tela inicial conforme apresentado na imagem a seguir:
 
 <img src="https://github.com/amagalhaes31/snake_unity/blob/master/.github/tela_inicial.png">
 
-Como pode ser observado, possui um botão chamado **"JOGAR"** para iniciar a partida. Após iniciada aparecerá a imagem a abaixo com um som de suspense.
+Como pode ser observado, possui um botão chamado **"JOGAR"** para iniciar a partida. Após iniciada aparecerá a imagem abaixo com um som de suspense.
 
 <p align="center">
 <img src="https://github.com/amagalhaes31/snake_unity/blob/master/.github/tela_jogo.PNG">
@@ -74,6 +74,9 @@ A tela de anuncios pode ser observada pela imagem a seguir:
 <p align="center">
 <img src="https://github.com/amagalhaes31/snake_unity/blob/master/.github/tela_ad.PNG">
 </p>
+
+
+Se o jogador assistir o anúncio ele ganha uma vida na partida podendo jogar novamente, se ele pressionar o botão de **Skip** reinicia a partida zerando a pontuação.
 
 
 ## :wrench: Ferramentas
