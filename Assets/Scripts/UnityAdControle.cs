@@ -30,6 +30,8 @@ public class UnityAdControle : MonoBehaviour
         //#if UNITY_ADS            
         if (Advertisement.IsReady())
         {
+             // Pausar o jogo
+            MenuPauseComp.pausado = true;
 
             var opcoes = new ShowOptions
             {
